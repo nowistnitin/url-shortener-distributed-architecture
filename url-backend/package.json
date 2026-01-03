@@ -1,0 +1,33 @@
+{
+  "name": "url-shortener-backend",
+  "version": "1.0.0",
+  "description": "Backend API for URL-Shortener develped in MERN stack.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "cross-env NODE_ENV=development node index.js" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayush0520/url-shortener-distributed-architecture.git"
+  },
+  "author": "Ayush Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayush0520/url-shortener-distributed-architecture/issues"
+  },
+  "homepage": "https://github.com/Ayush0520/url-shortener-distributed-architecture#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1",
+    "node-zookeeper-client": "^1.1.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.4"
+  }
+}
