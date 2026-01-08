@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888;2181
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: ./url-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000"
+    environment:
+      - PORT=5000
+      - ZOOKEEPER_HOST=zookeeper
+      - ZOOKEEPER_PORT=2181
+    volumes:
+      - app_data:/data
+    depends_on:
+      - zookeeper
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./url-shortener-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_BACKEND_URL=http://127.0.0.1:3000
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+volumes:
+  app_data:
+
+networks:
+  app-network:
